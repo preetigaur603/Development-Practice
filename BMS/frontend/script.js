@@ -7,7 +7,9 @@ function displayBooks(){
   books.forEach((book,index)=>{
     const bookItem = document.createElement("div");
     const editBtn  = document.createElement("button");
+    const deleteBtn = document.createElement("button");
     editBtn.textContent = "Edit";
+    deleteBtn.textContent = "Delete";
     bookItem.textContent = `Title:${book.title}
     Author:${book.author}
     ISBN: ${book.isbn}
@@ -23,8 +25,14 @@ function displayBooks(){
       document.querySelector("#publication-date").value = selectedBook.publicationDate;
       document.querySelector("#genre").value = selectedBook.genre;
     });
-    bookItem.appendChild(editBtn);
+    deleteBtn.addEventListener("click",()=>{
+        books.splice(index,1);
+        displayBooks();
+      });
     bookList.appendChild(bookItem);
+    bookItem.appendChild(editBtn);
+    bookItem.appendChild(deleteBtn);
+    
   });
 }
 form.addEventListener("submit",(event)=>{
