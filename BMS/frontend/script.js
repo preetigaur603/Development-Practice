@@ -1,6 +1,32 @@
 const books = [];
+let editingIndex= null;
+const bookList = document.querySelector("#bookList");
 const form = document.querySelector('form');
-const editButton = document.querySelector("#editBook");
+function displayBooks(){
+  bookList.innerHTML = "";
+  books.forEach((book,index)=>{
+    const bookItem = document.createElement("div");
+    const editBtn  = document.createElement("button");
+    editBtn.textContent = "Edit";
+    bookItem.textContent = `Title:${book.title}
+    Author:${book.author}
+    ISBN: ${book.isbn}
+    Publication Date: ${book.publicationDate}
+    Genre: ${book.genre}
+    `;
+    editBtn.addEventListener("click",()=>{
+      const selectedBook = books[index];
+      editingIndex = index;
+      document.querySelector("#title").value = selectedBook.title;
+      document.querySelector("#author").value = selectedBook.author;
+      document.querySelector("#isbn").value = selectedBook.isbn;
+      document.querySelector("#publication-date").value = selectedBook.publicationDate;
+      document.querySelector("#genre").value = selectedBook.genre;
+    });
+    bookItem.appendChild(editBtn);
+    bookList.appendChild(bookItem);
+  });
+}
 form.addEventListener("submit",(event)=>{
   event.preventDefault();
 
@@ -26,10 +52,16 @@ form.addEventListener("submit",(event)=>{
     publicationDate:publicationDate,
     genre:genre
   };
-  books.push(book);
-  console.log(books);   
-});
-
-editButton.addEventListener("click",()=>{
+  if (editingIndex === null){
+    books.push(book);
+  }
+  else{
+    books[editingIndex] = book;
+  }
+  
+  displayBooks();
+  editingIndex = null;
+  console.log(books); 
   
 });
+
