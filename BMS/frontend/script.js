@@ -1,5 +1,5 @@
 const form = document.querySelector('form');
-form.addEventListener("submit",function (event) {
+form.addEventListener("submit",(event)=>{
   event.preventDefault();
 
   const title = document.querySelector("#title").value.trim();
@@ -11,5 +11,8 @@ form.addEventListener("submit",function (event) {
   if(!title  || !author || !isbn  || !publicationDate  || !genre)
   {
     console.log("field can not be empty");
+  }
+  if(isNaN(isbn)){
+    console.log("ISBN must be a number");
   }
 });
