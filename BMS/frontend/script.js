@@ -1,3 +1,4 @@
+const books = [];
 const form = document.querySelector('form');
 form.addEventListener("submit",(event)=>{
   event.preventDefault();
@@ -11,8 +12,20 @@ form.addEventListener("submit",(event)=>{
   if(!title  || !author || !isbn  || !publicationDate  || !genre)
   {
     console.log("field can not be empty");
+    return;
   }
-  if(isNaN(isbn)){
-    console.log("ISBN must be a number");
+  if(isNaN(isbn) || isbn.length <10 || isbn.length >13 ){
+    console.log("ISBN must be a number and  should be 10 digit minimum or 13 digit maximimum");
+  return;
   }
+  const book = {
+    title:title,
+    author:author,
+    isbn:isbn,
+    publicationDate:publicationDate,
+    genre:genre
+  };
+  books.push(book);
+  console.log(books);
+  
 });
