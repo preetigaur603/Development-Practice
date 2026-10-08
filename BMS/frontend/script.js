@@ -1,5 +1,6 @@
 const books = [];
 const form = document.querySelector('form');
+const editButton = document.querySelector("#editBook");
 form.addEventListener("submit",(event)=>{
   event.preventDefault();
 
@@ -26,6 +27,9 @@ form.addEventListener("submit",(event)=>{
     genre:genre
   };
   books.push(book);
-  console.log(books);
+  console.log(books);   
+});
+
+editButton.addEventListener("click",()=>{
   
 });
